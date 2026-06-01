@@ -1,0 +1,6 @@
+apiVersion: v2
+name: podinfo
+description: GitOps demo - podinfo as a Helm chart
+type: application
+version: 0.1.0
+appVersion: "6.6.0"

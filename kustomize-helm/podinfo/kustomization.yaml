@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Combined pattern: Kustomize inflates a Helm chart, then layers Kustomize edits
+# on top. Used by teams that consume a Helm chart but still want Kustomize's
+# namespace/label/patch handling. Here we inflate the upstream podinfo chart.
+#
+# Requires the Helm-enabled build:
+#   kubectl kustomize --enable-helm kustomize-helm/podinfo
+#   Argo CD / Harness GitOps: enable the "--enable-helm" kustomize build option
+#   on the Application (Manifest generation > Enable Helm).
+
+namespace: demo-dev
+
+helmCharts:
+  - name: podinfo
+    repo: https://stefanprodan.github.io/podinfo
+    version: 6.7.1
+    releaseName: podinfo-combined
+    valuesInline:
+      replicaCount: 1
+      ui:
+        message: "GitOps Demo - Kustomize+Helm (DEV)"
+        color: "#8957e5"
+
+# Kustomize layer applied on top of the rendered Helm output.
+labels:
+  - includeSelectors: false
+    pairs:
+      rendered-by: kustomize-helm

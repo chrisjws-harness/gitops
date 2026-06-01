@@ -1,0 +1,22 @@
+# Default values - overridden per environment by values-<env>.yaml
+replicaCount: 1
+
+image:
+  repository: ghcr.io/stefanprodan/podinfo
+  tag: "6.6.0"
+  pullPolicy: IfNotPresent
+
+ui:
+  message: "GitOps Demo"
+  color: "#34577c"
+
+service:
+  port: 9898
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 32Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi

@@ -1,0 +1,9 @@
+# STAGING runs the candidate promoted out of dev.
+replicaCount: 2
+
+image:
+  tag: "6.7.0"
+
+ui:
+  message: "GitOps Demo - STAGING (v6.7.0, Helm)"
+  color: "#d29922"

@@ -1,0 +1,38 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: demo-dev
+namePrefix: dev-
+
+resources:
+  - ../../base
+
+# Image tag = the artifact version. DEV runs the newest build.
+# Promotion to staging/prod = bumping the tag in those overlays via PR.
+images:
+  - name: ghcr.io/stefanprodan/podinfo
+    newTag: 6.7.1
+
+replicas:
+  - name: podinfo
+    count: 1
+
+patches:
+  - target:
+      kind: Deployment
+      name: podinfo
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: podinfo
+      spec:
+        template:
+          spec:
+            containers:
+              - name: podinfo
+                env:
+                  - name: PODINFO_UI_MESSAGE
+                    value: "GitOps Demo - DEV (v6.7.1)"
+                  - name: PODINFO_UI_COLOR
+                    value: "#1f6feb"

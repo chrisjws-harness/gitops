@@ -1,0 +1,37 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: demo-prod
+namePrefix: prod-
+
+resources:
+  - ../../base
+
+# PROD runs the last fully-promoted, stable version.
+images:
+  - name: ghcr.io/stefanprodan/podinfo
+    newTag: 6.6.0
+
+replicas:
+  - name: podinfo
+    count: 3
+
+patches:
+  - target:
+      kind: Deployment
+      name: podinfo
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: podinfo
+      spec:
+        template:
+          spec:
+            containers:
+              - name: podinfo
+                env:
+                  - name: PODINFO_UI_MESSAGE
+                    value: "GitOps Demo - PROD (v6.6.0)"
+                  - name: PODINFO_UI_COLOR
+                    value: "#238636"

@@ -1,0 +1,9 @@
+# DEV runs the newest build.
+replicaCount: 1
+
+image:
+  tag: "6.7.1"
+
+ui:
+  message: "GitOps Demo - DEV (v6.7.1, Helm)"
+  color: "#1f6feb"
