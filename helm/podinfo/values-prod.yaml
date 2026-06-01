@@ -1,6 +1,6 @@
 replicaCount: 3
 image:
-  tag: 6.7.1
+  tag: v1.4.1
 ui:
   message: GitOps Demo - STAGING (v6.7.1, Helm)
   color: '#238636'
