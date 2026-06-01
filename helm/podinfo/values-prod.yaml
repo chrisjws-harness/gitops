@@ -1,9 +1,6 @@
-# PROD runs the last fully-promoted, stable version.
 replicaCount: 3
-
 image:
-  tag: "6.6.0"
-
+  tag: 6.7.1
 ui:
-  message: "GitOps Demo - PROD (v6.6.0, Helm)"
-  color: "#238636"
+  message: GitOps Demo - STAGING (v6.7.1, Helm)
+  color: '#238636'
