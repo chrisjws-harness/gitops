@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  tag: "6.7.3"
+  tag: "6.7.2"
 
 ui:
   message: "GitOps Demo - DEV (v6.7.1, Helm)"
