@@ -1,5 +1,5 @@
 # DEV runs the newest build.
-replicaCount: 1
+replicaCount: 5
 
 image:
   tag: "6.9.0"
