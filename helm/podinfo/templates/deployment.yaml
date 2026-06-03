@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1      # was: apps/v1
+kind: Rollout                         # was: Deployment
 metadata:
   name: {{ include "podinfo.fullname" . }}
   labels:
@@ -44,3 +44,11 @@ spec:
             periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+  strategy:                           # <-- NEW
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {}                   # hold until you promote
+        - setWeight: 50
+        - pause: { duration: 60 }
+        - setWeight: 100
